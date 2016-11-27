@@ -6,8 +6,8 @@ ENV USER user
 ENV HOME /home/${USER}
 ENV QT_MAJOR 5
 ENV QT_MINOR 6
-ENV QT_PATCH 1
-ENV QT_FIX -1
+ENV QT_PATCH 2
+ENV QT_FIX ${QT_FIX}
 ENV QT_QPA_PLATFORM minimal
 ENV QT_DIR ${HOME}/qt
 ENV QT_INSTALLER qt-opensource-linux-x64-${QT_MAJOR}.${QT_MINOR}.${QT_PATCH}${QT_FIX}.run
@@ -27,7 +27,7 @@ RUN \
 	apt-get -qq clean
 
 RUN \
-	curl -sL --retry 10 --retry-delay 10 -o /tmp/${QT_INSTALLER} https://download.qt.io/official_releases/qt/${QT_MAJOR}.${QT_MINOR}/${QT_MAJOR}.${QT_MINOR}.${QT_PATCH}${QT_FIX}/${QT_INSTALLER} && \
+	curl -sL --retry 10 --retry-delay 10 -o /tmp/${QT_INSTALLER} https://download.qt.io/official_releases/qt/${QT_MAJOR}.${QT_MINOR}/${QT_MAJOR}.${QT_MINOR}.${QT_PATCH}/${QT_INSTALLER} && \
 	chmod +x /tmp/${QT_INSTALLER} && \
 	/tmp/${QT_INSTALLER} --no-force-installations --script /tmp/setup.qs && \
 	rm -f /tmp/${QT_INSTALLER} /tmp/setup.qs
